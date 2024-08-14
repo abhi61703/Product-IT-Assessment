@@ -1,37 +1,30 @@
 package com.ust.SurveyMicro.Controller;
 
 import com.ust.SurveyMicro.Enitity.Survey;
-import com.ust.SurveyMicro.Enitity.SurveyDTO;
 import com.ust.SurveyMicro.Service.SurveyService;
+import com.ust.SurveyMicro.responses.FullResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/survey")
+@RequestMapping("/")
 public class SurveyController {
+
     @Autowired
     private SurveyService surveyService;
 
-    @GetMapping("/{survey_id}")
-    public ResponseEntity<SurveyDTO> getSurveyById(@PathVariable("survey_id") String surveyId) {
-        SurveyDTO survey = surveyService.getSurveyById(surveyId);
-        return ResponseEntity.ok(survey);
+    @PostMapping("/survey")
+    public FullResponse addSurvey(@RequestBody Survey survey) {
+        return surveyService.addSurvey(survey);
     }
 
-    @GetMapping
-    public ResponseEntity<List<SurveyDTO>> getAllSurveys() {
-        List<SurveyDTO> surveys = surveyService.getAllSurveys();
-        return ResponseEntity.ok(surveys);
+    @GetMapping("/surveys")
+    public List<FullResponse> getSurveys() {
+        return surveyService.getSurveys();
     }
 
-    @PostMapping
-    public ResponseEntity<Survey> createSurvey(@RequestBody Survey survey) {
-        Survey createdSurvey = surveyService.createSurvey(survey);
-        return new ResponseEntity<>(createdSurvey, HttpStatus.CREATED);
-    }
+
 }
-

@@ -1,13 +1,17 @@
 package com.ust.SurveyMicro.FeignClient;
 
-import com.ust.SurveyMicro.Enitity.Assessment;
+import com.ust.SurveyMicro.responses.SetNameDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "assessment-service", url = "http://localhost:8082")
+import java.util.List;
+
+@FeignClient(name = "asessment-service",url = "http://localhost:8081/")
 public interface AssessmentClient {
-    @GetMapping("/assessment/{setname}")
-    ResponseEntity<Assessment> getAssessmentBySetName(@PathVariable("setname") String setname);
+
+    @GetMapping("/assessment/{setName}")
+    public ResponseEntity<List<SetNameDto>> getSet(@PathVariable String setName);
+
 }

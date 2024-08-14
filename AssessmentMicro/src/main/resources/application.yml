@@ -4,10 +4,10 @@ spring:
   application:
     name: assessment-service
   datasource:
-    url: jdbc:mysql://localhost:3306/assessmentdb
-    username: root
-    password: pass@word1
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/assessmentdb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update

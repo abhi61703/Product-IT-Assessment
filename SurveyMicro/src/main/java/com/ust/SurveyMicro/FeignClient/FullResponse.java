@@ -1,6 +1,7 @@
-package com.ust.SurveyMicro.Enitity;
+package com.ust.SurveyMicro.FeignClient;
 
-import jakarta.persistence.*;
+import com.ust.SurveyMicro.Enitity.Status;
+import com.ust.SurveyMicro.responses.SetNameDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,20 +9,15 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@Entity
-@Table(name = "surveys")
-@AllArgsConstructor
 @NoArgsConstructor
-public class Survey {
+@AllArgsConstructor
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FullResponse {
     private Long surveyId;
-
     private String domain;
     public Status status;
     public List<String> email;
     public String companyName;
     public String setName;
-
+    public List<SetNameDto> setdata;
 }
