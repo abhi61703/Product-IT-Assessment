@@ -16,18 +16,27 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Service for managing surveys. Contains business logic for survey operations.
+ */
 @Service
 public class SurveyService {
 
-    private static final Logger logger = LoggerFactory.getLogger(SurveyService.class);
+    private static final Logger logger = LoggerFactory.getLogger(SurveyService.class); // Logger for this service
 
     @Autowired
-    private SurveyRepository surveyRepository;
+    private SurveyRepository surveyRepository; // Repository for accessing survey data
 
     @Autowired
-    private AssessmentClient assessmentClient;
+    private AssessmentClient assessmentClient; // Feign client for interacting with the Assessment Service
 
-    // Method to get a survey by its setName
+    /**
+     * Retrieves a survey by its set name.
+     *
+     * @param setName the name of the survey set
+     * @return SurveyDTO containing the survey details and associated questions
+     * @throws NoSuchElementException if survey or assessment is not found
+     */
     public SurveyDTO getSurveyBySetName(String setName) {
         // Retrieve survey from the repository by setName
         Survey survey = surveyRepository.findBySetName(setName)
@@ -55,6 +64,11 @@ public class SurveyService {
         }
     }
 
+    /**
+     * Retrieves all surveys and their associated assessments.
+     *
+     * @return List of SurveyDTOs containing details and questions for all surveys
+     */
     public List<SurveyDTO> getAllSurveys() {
         List<Survey> surveys = surveyRepository.findAll();
         List<SurveyDTO> surveyDTOs = new ArrayList<>();
@@ -102,6 +116,12 @@ public class SurveyService {
         return surveyDTOs;
     }
 
+    /**
+     * Creates a new survey.
+     *
+     * @param survey the Survey object to be created
+     * @return ResponseEntity with a message indicating success or failure
+     */
     public ResponseEntity<String> createSurvey(Survey survey) {
         try {
             // Retrieve assessment based on setName
