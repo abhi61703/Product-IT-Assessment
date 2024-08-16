@@ -1,6 +1,6 @@
-package com.ust.SurveyMicro.FeignClient;
+package com.example.SurveyMicro.FeignClient;
 
-import com.ust.SurveyMicro.Enitity.Assessment;
+import com.example.SurveyMicro.Enitity.Assessment;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

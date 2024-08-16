@@ -1,6 +1,6 @@
-package com.ust.SurveyMicro.Repository;
+package com.example.SurveyMicro.Repository;
 
-import com.ust.SurveyMicro.Enitity.Survey;
+import com.example.SurveyMicro.Enitity.Survey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.ust.SurveyMicro;
+package com.example.SurveyMicro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

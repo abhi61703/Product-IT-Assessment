@@ -1,11 +1,11 @@
-package com.ust.SurveyMicro.Service;
+package com.example.SurveyMicro.Service;
 
-import com.ust.SurveyMicro.Enitity.Assessment;
-import com.ust.SurveyMicro.Enitity.Question;
-import com.ust.SurveyMicro.Enitity.Survey;
-import com.ust.SurveyMicro.Enitity.SurveyDTO;
-import com.ust.SurveyMicro.FeignClient.AssessmentClient;
-import com.ust.SurveyMicro.Repository.SurveyRepository;
+import com.example.SurveyMicro.Enitity.Assessment;
+import com.example.SurveyMicro.Enitity.Question;
+import com.example.SurveyMicro.Enitity.Survey;
+import com.example.SurveyMicro.Enitity.SurveyDTO;
+import com.example.SurveyMicro.FeignClient.AssessmentClient;
+import com.example.SurveyMicro.Repository.SurveyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

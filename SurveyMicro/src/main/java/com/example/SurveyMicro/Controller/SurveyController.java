@@ -1,8 +1,8 @@
-package com.ust.SurveyMicro.Controller;
+package com.example.SurveyMicro.Controller;
 
-import com.ust.SurveyMicro.Enitity.Survey;
-import com.ust.SurveyMicro.Enitity.SurveyDTO;
-import com.ust.SurveyMicro.Service.SurveyService;
+import com.example.SurveyMicro.Enitity.Survey;
+import com.example.SurveyMicro.Enitity.SurveyDTO;
+import com.example.SurveyMicro.Service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

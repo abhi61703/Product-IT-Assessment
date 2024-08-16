@@ -1,4 +1,4 @@
-package com.ust.SurveyMicro;
+package com.example.SurveyMicro;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

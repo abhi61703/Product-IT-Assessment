@@ -1,4 +1,4 @@
-package com.ust.SurveyMicro.Enitity;
+package com.example.SurveyMicro.Enitity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
