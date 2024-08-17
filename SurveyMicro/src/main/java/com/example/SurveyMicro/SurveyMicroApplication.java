@@ -2,6 +2,7 @@ package com.example.SurveyMicro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
@@ -12,8 +13,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * It also enables Feign clients and service discovery.
  */
 @SpringBootApplication
-@EnableFeignClients // Enables the use of Feign clients for inter-service communication
-@EnableDiscoveryClient // Registers this service with a service discovery server (e.g., Eureka)
+@EnableFeignClients
+@EnableDiscoveryClient
+@EnableCaching
 public class SurveyMicroApplication {
 
 	public static void main(String[] args) {

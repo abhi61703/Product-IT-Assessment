@@ -43,19 +43,27 @@ public class AssessmentService {
         return assessmentRepository.findById(setId).map(this::convertToDTO);
     }
 
-    public List<String> getQuestionNamesBySetName(String setName) {
-        Assessment assessment = assessmentRepository.findBySetName(setName)
-                .orElseThrow(() -> new NoSuchElementException("Assessment not found with set name: " + setName));
-        return assessment.getQuestions().stream()
-                .map(Question::getQuestionName)
-                .collect(Collectors.toList());
-    }
+//    public List<String> getQuestionNamesBySetName(String setName) {
+//        Assessment assessment = assessmentRepository.findBySetName(setName)
+//                .orElseThrow(() -> new NoSuchElementException("Assessment not found with set name: " + setName));
+//        return assessment.getQuestions().stream()
+//                .map(Question::getQuestionName)
+//                .collect(Collectors.toList());
+//    }
 
     // Method to create a new assessment
     public AssessmentDTO createAssessment(AssessmentDTO assessmentDTO) {
+        // Check if the setName already exists
+        Optional<Assessment> existingAssessment = assessmentRepository.findBySetName(assessmentDTO.getSetName());
+        if (existingAssessment.isPresent()) {
+            throw new NoSuchElementException("SetName already exists");
+        }
+
+        // Convert DTO to Entity and save
         Assessment assessment = convertToEntity(assessmentDTO);
         assessment = assessmentRepository.save(assessment);
 
+        // Save associated questions
         for (Question question : assessment.getQuestions()) {
             question.setSetId(assessment.getSetId()); // Set the assessment setId in each question
             questionRepo.save(question);
@@ -63,6 +71,7 @@ public class AssessmentService {
 
         return convertToDTO(assessment);
     }
+
 
     @Transactional
     public void updateQuestionOptions(Long setId, Long questionId, List<AnswerDTO> answerDTOs) {

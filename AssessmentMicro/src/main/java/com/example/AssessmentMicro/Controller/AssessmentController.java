@@ -30,15 +30,15 @@ public class AssessmentController {
         }
     }
 
-    @GetMapping("/{setName}/questions")
-    public ResponseEntity<?> getQuestionNamesBySetName(@PathVariable String setName) {
-        try {
-            List<String> questionNames = assessmentService.getQuestionNamesBySetName(setName);
-            return ResponseEntity.ok(questionNames);
-        } catch (Exception e) {
-            return ResponseEntity.ok("Error retrieving question names: " + e.getMessage());
-        }
-    }
+//    @GetMapping("/{setName}/questions")
+//    public ResponseEntity<?> getQuestionNamesBySetName(@PathVariable String setName) {
+//        try {
+//            List<String> questionNames = assessmentService.getQuestionNamesBySetName(setName);
+//            return ResponseEntity.ok(questionNames);
+//        } catch (Exception e) {
+//            return ResponseEntity.ok("Error retrieving question names: " + e.getMessage());
+//        }
+//    }
 
     @GetMapping("/{setId}")
     public ResponseEntity<?> getAssessmentBySetId(@PathVariable Long setId) {
@@ -70,7 +70,7 @@ public class AssessmentController {
             AssessmentDTO createdAssessment = assessmentService.createAssessment(assessmentDTO);
             return ResponseEntity.ok(createdAssessment);
         } catch (Exception e) {
-            return ResponseEntity.ok("Error creating assessment: " + e.getMessage());
+            return ResponseEntity.ok("Error creating assessment:Setname already exists");
         }
     }
 

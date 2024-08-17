@@ -17,6 +17,7 @@ public class Assessment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long setId;
+    @Column(unique = true)
     private String setName;
     private String createdBy = "admin";
     private String updatedBy = "admin";

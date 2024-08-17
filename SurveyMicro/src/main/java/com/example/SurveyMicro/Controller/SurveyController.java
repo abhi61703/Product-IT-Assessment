@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Controller for managing surveys. Handles requests related to survey operations.
@@ -18,34 +17,53 @@ import java.util.NoSuchElementException;
 public class SurveyController {
 
     @Autowired
-    private SurveyService surveyService; // Service for handling survey business logic
+    private SurveyService surveyService;
 
     /**
      * Retrieves a survey by its set name.
      *
      * @param setName the name of the survey set
-     * @return ResponseEntity containing SurveyDTO or an empty SurveyDTO if not found
+     * @return ResponseEntity containing SurveyDTO or error message
      */
     @GetMapping("/{setName}")
-    public ResponseEntity<SurveyDTO> getSurveyBySetName(@PathVariable("setName") String setName) {
-        try {
-            SurveyDTO survey = surveyService.getSurveyBySetName(setName); // Fetch survey from service
-            return ResponseEntity.ok(survey); // Return the survey with status OK
-        } catch (NoSuchElementException e) {
-            // Returning an empty response body with status OK if survey is not found
-            return ResponseEntity.ok(new SurveyDTO());
+    public ResponseEntity<?> getSurveyBySetName(@PathVariable("setName") String setName) {
+        Object response = surveyService.getAssessmentBySetName(setName);
+        if (response instanceof SurveyDTO) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.ok().body(response);
+        }
+    }
+
+    /**
+     * Retrieves a survey by its survey ID.
+     *
+     * @param surveyId the ID of the survey
+     * @return ResponseEntity containing SurveyDTO or error message
+     */
+    @GetMapping("/id/{surveyId}")
+    public ResponseEntity<?> getSurveyById(@PathVariable("surveyId") Long surveyId) {
+        Object response = surveyService.getSurveyById(surveyId);
+        if (response instanceof SurveyDTO) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.ok().body(response);
         }
     }
 
     /**
      * Retrieves a list of all surveys.
      *
-     * @return ResponseEntity containing a list of SurveyDTOs
+     * @return ResponseEntity containing a list of SurveyDTOs or error message
      */
     @GetMapping
-    public ResponseEntity<List<SurveyDTO>> getAllSurveys() {
-        List<SurveyDTO> surveys = surveyService.getAllSurveys(); // Fetch all surveys from service
-        return ResponseEntity.ok(surveys); // Return the list of surveys with status OK
+    public ResponseEntity<?> getAllSurveys() {
+        Object response = surveyService.getAllSurveys();
+        if (response instanceof List) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.ok().body(response);
+        }
     }
 
     /**
@@ -55,14 +73,12 @@ public class SurveyController {
      * @return ResponseEntity with a message indicating success or failure
      */
     @PostMapping
-    public ResponseEntity<String> createSurvey(@RequestBody Survey survey) {
-        try {
-            // Call the service to create a survey and get the response
-            ResponseEntity<String> response = surveyService.createSurvey(survey);
-            return ResponseEntity.ok(response.getBody()); // Return the response from the service
-        } catch (Exception e) {
-            // Return a generic message with status OK if an error occurs
-            return ResponseEntity.ok("Error occurred while creating survey: " + e.getMessage());
+    public ResponseEntity<?> createSurvey(@RequestBody Survey survey) {
+        Object response = surveyService.createSurvey(survey);
+        if (response instanceof SurveyDTO) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.ok().body(response);
         }
     }
 }
