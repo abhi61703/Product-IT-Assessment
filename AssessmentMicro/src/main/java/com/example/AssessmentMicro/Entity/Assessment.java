@@ -43,5 +43,4 @@ public class Assessment {
         updatedTimestamp = LocalDateTime.now();
     }
 
-    // Getters and setters (if not using Lombok)
 }
